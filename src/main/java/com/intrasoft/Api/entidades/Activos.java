@@ -29,18 +29,6 @@ public class Activos {
 	
 
 	/**
-	 * @return the id_
-	 */
-	public String getId_() {
-		return _id.toHexString();
-	}
-	/**
-	 * @param id_ the id_ to set
-	 */
-	public void setId_(ObjectId _id) {
-		this._id = _id;
-	}
-	/**
 	 * @return the nombre
 	 */
 	public String getNombre() {
@@ -51,6 +39,18 @@ public class Activos {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	/**
+	 * @return the id_
+	 */
+	public String getId_() {
+		return _id.toHexString();
+	}
+	/**
+	 * @param id_ the id_ to set
+	 */
+	public void setId_(ObjectId _id) {
+		this._id = _id;
 	}
 	/**
 	 * @return the descripción
