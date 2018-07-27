@@ -46,6 +46,13 @@ public class Activos {
 	public String getId_() {
 		return _id.toHexString();
 	}
+	
+	/**
+	 * @return the id_
+	 */
+	public ObjectId get_Id_() {
+		return _id;
+	}
 	/**
 	 * @param id_ the id_ to set
 	 */
