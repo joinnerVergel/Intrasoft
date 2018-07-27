@@ -1,6 +1,5 @@
 package com.intrasoft.Api.entidades;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import org.bson.types.ObjectId;
@@ -12,7 +11,7 @@ public class Activos {
 	private ObjectId _id;
 
 	private String nombre;
-	private String descripción;
+	private String descripcion;
 	private String tipo;
 	private String serial;
 	private Integer numeroInterno;
@@ -25,9 +24,35 @@ public class Activos {
 	private Date fecBaja;
 	private String estadoActual; 
 	private String color;
+	private Personas PersonaResponsable;
+	private Areas AreaAsignada;
 
 	
 
+	/**
+	 * @return the personaResponsable
+	 */
+	public Personas getPersonaResponsable() {
+		return PersonaResponsable;
+	}
+	/**
+	 * @param personaResponsable the personaResponsable to set
+	 */
+	public void setPersonaResponsable(Personas personaResponsable) {
+		PersonaResponsable = personaResponsable;
+	}
+	/**
+	 * @return the areaAsignada
+	 */
+	public Areas getAreaAsignada() {
+		return AreaAsignada;
+	}
+	/**
+	 * @param areaAsignada the areaAsignada to set
+	 */
+	public void setAreaAsignada(Areas areaAsignada) {
+		AreaAsignada = areaAsignada;
+	}
 	/**
 	 * @return the nombre
 	 */
@@ -48,28 +73,22 @@ public class Activos {
 	}
 	
 	/**
-	 * @return the id_
-	 */
-	public ObjectId get_Id_() {
-		return _id;
-	}
-	/**
-	 * @param id_ the id_ to set
+	 * @param _id the id_ to set
 	 */
 	public void setId_(ObjectId _id) {
 		this._id = _id;
 	}
 	/**
-	 * @return the descripción
+	 * @return the descripcion
 	 */
-	public String getDescripción() {
-		return descripción;
+	public String getDescripcion() {
+		return descripcion;
 	}
 	/**
-	 * @param descripción the descripción to set
+	 * @param descripcion the descripcion to set
 	 */
-	public void setDescripción(String descripción) {
-		this.descripción = descripción;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	/**
 	 * @return the tipo
@@ -174,7 +193,7 @@ public class Activos {
 		return fecCompra;
 	}
 	/**
-	 * @param fecCompra the fecCompra to set
+	 * @param FecCompra the fecCompra to set
 	 */
 	public void setFecCompra(Date FecCompra) {
 		fecCompra = FecCompra;
@@ -186,7 +205,7 @@ public class Activos {
 		return fecBaja;
 	}
 	/**
-	 * @param fecBaja the fecBaja to set
+	 * @param FecBaja the fecBaja to set
 	 */
 	public void setFecBaja(Date FecBaja) {
 		fecBaja = FecBaja;
@@ -220,7 +239,7 @@ public class Activos {
 	 */
 	@Override
 	public String toString() {
-		return "Activos [_id=" + _id + ", nombre=" + nombre + ", descripción=" + descripción + ", tipo=" + tipo
+		return "Activos [_id=" + _id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tipo=" + tipo
 				+ ", serial=" + serial + ", numeroInterno=" + numeroInterno + ", peso=" + peso + ", alto=" + alto
 				+ ", ancho=" + ancho + ", largo=" + largo + ", valorCompra=" + valorCompra + ", FecCompra=" + fecCompra
 				+ ", FecBaja=" + fecBaja + ", estadoActual=" + estadoActual + ", color=" + color + "]";
