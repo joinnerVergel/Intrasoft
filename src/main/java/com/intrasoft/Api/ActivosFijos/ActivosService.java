@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -30,6 +31,7 @@ public class ActivosService {
 
 	/**
 	 * Metodo que retorna la lista de todos los activos fijos existentes
+	 * 
 	 * @return Lista de todos los Activos
 	 */
 	@GET
@@ -49,12 +51,14 @@ public class ActivosService {
 			return Response.status(500).entity("Lo sentimos... Se produjo un error en el servidor").build();
 		}
 	}
-	
-	
+
 	/**
 	 * Metodo que permite Encontrar los activos fijos por nombre
-	 * @param nombre  - parametro en la url correpondiente al nombre del activo
-	 * @return Response - lista con los activos encontrados por el nombre indicado
+	 * 
+	 * @param nombre
+	 *            - parametro en la url correpondiente al nombre del activo
+	 * @return Response - lista con los activos encontrados por el nombre
+	 *         indicado
 	 */
 	@GET
 	@Path("/activos/Encontrar/{nombre}")
@@ -76,8 +80,10 @@ public class ActivosService {
 
 	/**
 	 * Metodo que permite crear activos fijos
-	 * @param activo  - Json con la estructura de los activosFijos
-	 * @return Response  
+	 * 
+	 * @param activo
+	 *            - Json con la estructura de los activosFijos
+	 * @return Response
 	 */
 	@POST
 	@Path("/activos/Nuevo/")
@@ -112,17 +118,23 @@ public class ActivosService {
 	}
 
 	/**
-	 * Metodo que permite actualizar el numero interno y la fecha de baja de un activo fijo
-	 * @param serial  - Codigo del Activo que se actualizará
-	 * @param sInterno - Nuevo valor para el Numero interno del activo
-	 * @param dia  - dia de la fecha de baja 
-	 * @param mes  - mes de la fecha de baja
-	 * @param anio - año de la fecha de baja
-	 * @return Response 
+	 * Metodo que permite actualizar el numero interno y la fecha de baja de un
+	 * activo fijo
+	 * 
+	 * @param serial
+	 *            - Codigo del Activo que se actualizará
+	 * @param sInterno
+	 *            - Nuevo valor para el Numero interno del activo
+	 * @param dia
+	 *            - dia de la fecha de baja
+	 * @param mes
+	 *            - mes de la fecha de baja
+	 * @param anio
+	 *            - año de la fecha de baja
+	 * @return Response
 	 */
 	@PUT
 	@Path("/activos/Actualizar/{serial}/{sInterno}/{dia}-{mes}-{anio}")
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response ActualizarActivo(@PathParam("serial") String serial, @PathParam("sInterno") Integer sInterno,
 			@PathParam("dia") Integer dia, @PathParam("mes") Integer mes, @PathParam("anio") Integer anio) {
 		try {
@@ -163,7 +175,34 @@ public class ActivosService {
 			logger.error("ERROR >> Se produjo un error en el servidor ...");
 			return Response.status(500).entity("Lo sentimos... Se produjo un error en el servidor").build();
 		}
+	}
 
+	/**
+	 * @param serial  del activo a eliminar
+	 * @return Response
+	 */
+	@DELETE
+	@Path("/activos/Eliminar/{serial}")
+	public Response ActualizarActivo(@PathParam("serial") String serial) {
+		try {
+			if (serial == null) {
+				logger.error("ERROR >> Falta el serial del activo a leiminar ...");
+				return Response.status(400).entity("Error...Faltan los datos minimos para actualizar el activo")
+						.build();
+			}
+			Activos busqueda = repository.findByserial(serial);
+			if (busqueda != null) {
+				repository.delete(busqueda);
+				logger.info("DELETE >> Activo eliminado Exitosamente...");
+				return Response.status(200).entity("Activo eliminado Exitosamente").build();
+			} else {
+				logger.info("Error >> No existe el activo con serial...");
+				return Response.status(404).entity("No existe el activo con serial " + serial).build();
+			}
+		} catch (Exception e) {
+			logger.error("ERROR >> Se produjo un error en el servidor ...");
+			return Response.status(500).entity("Lo sentimos... Se produjo un error en el servidor").build();
+		}
 	}
 
 }
